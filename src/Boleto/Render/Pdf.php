@@ -91,6 +91,15 @@ class Pdf extends AbstractPdf implements PdfContract
             $this->SetFont($this->PadraoFont, 'B', $this->fcel);
             $this->Cell(0, $this->cell, $this->_(Util::nReal($this->boleto[$i]->getValor())), 0, 1);
             $this->SetFont($this->PadraoFont, '', $this->fcel);
+
+            if ($this->boleto[$i]->hasQrCode()) {
+                $this->SetFont($this->PadraoFont, 'B', $this->fcel);
+                $this->Text($this->GetPageWidth() - 47, 19, 'Pague com PIX');
+                $pic = 'data://text/plain;base64,' . $this->boleto[$i]->getQrCode();
+                $this->Image($pic, $this->GetPageWidth() - 50, 20, 28, 0, 'png');
+                $this->SetFont($this->PadraoFont, '', $this->fcel);
+            }
+
         }
 
         $this->traco('Recibo do Pagador', 4);

@@ -308,6 +308,9 @@ abstract class AbstractBoleto implements BoletoContract
      */
     protected $mostrarEnderecoFichaCompensacao = false;
 
+
+    protected $qrCode;
+
     /**
      * AbstractBoleto constructor.
      *
@@ -397,6 +400,41 @@ abstract class AbstractBoleto implements BoletoContract
     {
         return $this->agencia;
     }
+
+
+    /**
+     * Seta o QRCode para impressao no boleto
+     * Informar em modo base64-encoded
+     */
+    public function setQrCode($qrCode){
+
+        $this->qrCode = $qrCode;
+
+    }
+
+
+    /**
+     * Retorna QRCode Base64
+     * 
+     * @return string
+     */
+    public function getQrCode(){
+
+        return $this->qrCode;
+
+    }
+
+    /**
+     * Retorna se temos QRCode para este boleto
+     * 
+     * @return bool
+     */
+    public function hasQrCode(){
+
+        return $this->qrCode != null;
+
+    }
+
 
     /**
      * Define o dígito da agência
